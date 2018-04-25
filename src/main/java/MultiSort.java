@@ -14,17 +14,15 @@ public class MultiSort implements Runnable {
         if (threadNum == 1) {
             start = 0;
         } else {
-            start = array.length / 2;
+            start = (threadNum - 1) * chunk;
         }
         int temp;
-        for (int i = start; i < start + chunk; i++) {
-            for (int j = i + 1; j < start + chunk; j++) {
+        for (int i = start; i < start + chunk; i++)
+            for (int j = i + 1; j < start + chunk; j++)
                 if (array[i] > array[j]) {
                     temp = array[i];
                     array[i] = array[j];
                     array[j] = temp;
                 }
-            }
-        }
     }
 }

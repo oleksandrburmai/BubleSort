@@ -4,7 +4,7 @@ public class Data {
     private static final int TEN_THOUSAND = 10000;
     private static final int HUNDRED_THOUSAND = 100000;
     private static final int MILLION = 1000000;
-
+    private static final int MAX_ELEMENT = 50;
 
     public void thousandEl() {
         int[] array = new int[THOUSAND];
@@ -53,19 +53,22 @@ public class Data {
         int[] array = new int[MILLION];
         int[] arrayMulti = new int[array.length];
         fillArray(array, arrayMulti);
-        long start = System.nanoTime();
-        new SingleSort().bubbleSort(array);
-        long end = System.nanoTime();
-        System.out.println("Spend - " + (end - start) + " nanosecond to single sort 1000000 element array");
+        long start, end;
         start = System.nanoTime();
         multiSort(arrayMulti);
+
         end = System.nanoTime();
         System.out.println("Spend - " + (end - start) + " nanosecond to multi sort 1000000 element array");
+        start = System.nanoTime();
+        new SingleSort().bubbleSort(array);
+        end = System.nanoTime();
+        System.out.println("Spend - " + (end - start) + " nanosecond to single sort 1000000 element array");
+
     }
 
     private void fillArray(int[] array, int[] arrayMulti) {
         for (int i = 0; i < array.length; i++) {
-            array[i] = (int) (Math.random() * 50);
+            array[i] = (int) (Math.random() * MAX_ELEMENT);
         }
         System.arraycopy(array, 0, arrayMulti, 0, arrayMulti.length);
     }
