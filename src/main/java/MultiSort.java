@@ -7,15 +7,18 @@ public class MultiSort implements Runnable {
         this.threadNum = threadNum;
     }
 
+    private int findArrayStart(int chunk) {
+        if (threadNum == 1) {
+            return 0;
+        } else {
+            return (threadNum - 1) * chunk;
+        }
+    }
+
     @Override
     public void run() {
         int chunk = array.length / 2;
-        int start;
-        if (threadNum == 1) {
-            start = 0;
-        } else {
-            start = (threadNum - 1) * chunk;
-        }
+        int start = findArrayStart(chunk);
         int temp;
         for (int i = start; i < start + chunk; i++)
             for (int j = i + 1; j < start + chunk; j++)
